@@ -283,6 +283,15 @@ else(MULTI_GASES)
 endif(MULTI_GASES)
 
 #------------------------------------------------------------------------------
+# Set molecular-diffusion flags for preprocessor (if defined)
+if(MOLECULAR_DIFFUSION)
+  message (STATUS "Enable molecular-diffusion")
+  ADD_DEFINITIONS(-DMOLECULAR_DIFFUSION)
+else(MOLECULAR_DIFFUSION)
+  message (STATUS "Disable molecular-diffusion")
+endif(MOLECULAR_DIFFUSION)
+
+#------------------------------------------------------------------------------
 # Build CCPP framework and physics
 
 SET(CCPP_FRAMEWORK_SRC ${PROJECT_SOURCE_DIR}/framework)

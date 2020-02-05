@@ -29,6 +29,7 @@ function usage   {
   echo "                                   SUITES=ABC,XYZ  (comma-separated list of CCPP suites; "
   echo "                                                    corresponding filenames: suite_ABC.xml. ...)"
   echo "                                   MULTI_GASES=Y/N (default N)"
+  echo "                                   MOLECULAR_DIFFUSION=Y/N (default N)"
   echo "                                   INTEL16=Y/N     (default N)"
   echo "           clean_before [optional] can be 'YES' (default) or 'NO'"
   echo "           clean_after  [optional] can be 'YES' (default) or 'NO'"
@@ -97,7 +98,7 @@ fi
 # Generate CCPP cmake flags from MAKE_OPT
 CCPP_CMAKE_FLAGS="-DCMAKE_INSTALL_PREFIX=${CCPP_DIR} -DNETCDF_DIR=${NETCDF} -DMPI=ON"
 CCPP_MAKE_FLAGS=""
-if [[ "${MAKE_OPT}" == *"SION=Y"* ]]; then
+if [[ "${MAKE_OPT}" == *" SION=Y"* ]]; then
   CCPP_CMAKE_FLAGS="${CCPP_CMAKE_FLAGS} -DSIONLIB=${SIONLIB}"
 fi
 if [[ "${MAKE_OPT}" == *"DEBUG=Y"* ]]; then
@@ -135,6 +136,11 @@ if [[ "${MAKE_OPT}" == *"MULTI_GASES=Y"* ]]; then
   CCPP_CMAKE_FLAGS="${CCPP_CMAKE_FLAGS} -DMULTI_GASES=ON"
 else
   CCPP_CMAKE_FLAGS="${CCPP_CMAKE_FLAGS} -DMULTI_GASES=OFF"
+fi
+if [[ "${MAKE_OPT}" == *"MOLECULAR_DIFFUSION=Y"* ]]; then
+  CCPP_CMAKE_FLAGS="${CCPP_CMAKE_FLAGS} -DMOLECULAR_DIFFUSION=ON"
+else
+  CCPP_CMAKE_FLAGS="${CCPP_CMAKE_FLAGS} -DMOLECULAR_DIFFUSION=OFF"
 fi
 if [[ "${MAKE_OPT}" == *"INTEL16=Y"* ]]; then
   CCPP_CMAKE_FLAGS="${CCPP_CMAKE_FLAGS} -DLEGACY_INTEL=ON"
